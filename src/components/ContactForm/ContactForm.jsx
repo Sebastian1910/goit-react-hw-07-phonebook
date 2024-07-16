@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../redux/contactsSlice";
-import { nanoid } from "nanoid";
 import styles from "./ContactForm.module.css";
 
 const ContactForm = () => {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [errors, setErrors] = useState({});
-  const contacts = useSelector((state) => state.contacts);
+  const contacts = useSelector((state) => state.contacts.contacts);
   const dispatch = useDispatch();
 
   const validateName = (name) => {
@@ -54,7 +53,7 @@ const ContactForm = () => {
       return;
     }
 
-    dispatch(addContact({ id: nanoid(), name, number }));
+    dispatch(addContact({ name, number }));
     setName("");
     setNumber("");
   };
